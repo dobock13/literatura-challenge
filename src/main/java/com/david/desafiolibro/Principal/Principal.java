@@ -106,7 +106,7 @@ public class Principal {
 
     private void mostrarAutoresResgistrados() {
        List<Autor> autores = autorRepositorio.findAll();
-
+        autores.stream().forEach(a-> System.out.println(a));
 
     }
 
