@@ -1,6 +1,7 @@
 package com.david.desafiolibro.repository;
 
 
+import com.david.desafiolibro.model.Idioma;
 import com.david.desafiolibro.model.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,5 @@ import java.util.Optional;
 public interface ILIbroRepository extends JpaRepository<Libro,Long> {
     Optional<Libro>findByTituloIgnoreCase(String titulo);
 
+    List<Libro> findByIdioma(Idioma idioma);
 }

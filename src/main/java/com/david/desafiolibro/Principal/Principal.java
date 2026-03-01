@@ -90,18 +90,47 @@ public class Principal {
 //        System.out.println("Cantidad minima de descargas: "+est.getMin());
 //        System.out.println("Cantidad de muestras evaluadas: "+ est.getCount());
 
-
-
     }
 
     private void buscarLibrosIdioma() {
-        System.out.println("Escribe el idioma en el que deseas buscar");
-        var libro = teclado.nextLine();
+        System.out.println("""
+                Escribe el idioma en el que deseas buscar
+                * Español
+                * Italiano*
+                * Latin
+                * Ingles
+                * Frances
+                * Portugues""");
+
+        var idioma = teclado.nextLine().toLowerCase();
+        Idioma lenguaje = Idioma.fromEspañol(idioma);
+
+        if (idioma.equals("español") || idioma.equals("ingles") || idioma.equals("frances") ||
+                idioma.equals("portugues") || idioma.equals("latin") || idioma.equals("italiano")) {
+
+            List<Libro> librosPorIdioma = libroRepositorio.findByIdioma(lenguaje);
+
+            if (librosPorIdioma.isEmpty()) {
+                System.out.println(String.format("\n [!] No hay libros registrados en el idioma '%s' \n", idioma));
+            } else {
+                System.out.println(String.format("\n--- LIBROS EN EL IDIOMA [%s] ---", idioma.toUpperCase()));
+                librosPorIdioma.forEach(System.out::println);
+            }
+        } else {
+            System.out.println("Idioma no válido. Por favor, usa los códigos de la lista (es, en, fr, pt).");
+        }
     }
 
     private void buscarAutoresporAño() {
         System.out.println("Escribe el año que deseas buscar");
-        var libro = teclado.nextLine();
+        var año = teclado.nextInt();
+        List<Autor> autoresVivos = autorRepositorio.buscarAutoresVivosEnDeterminadoAño(año);
+        if(autoresVivos.isEmpty()){
+            System.out.println(String.format("\n [!] No se encontraron autores vivos en el año %d \n", año));
+        }else{
+            System.out.println(String.format("\n--- AUTORES VIVOS EN EL AÑO %d ---", año));
+            autoresVivos.forEach(System.out::println);
+        }
     }
 
     private void mostrarAutoresResgistrados() {
@@ -111,7 +140,6 @@ public class Principal {
     }
 
     private void buscarLibrosRegistrados() {
-
         List<Libro>libros = libroRepositorio.findAll();
         libros.stream().forEach(l-> System.out.println(l));
 

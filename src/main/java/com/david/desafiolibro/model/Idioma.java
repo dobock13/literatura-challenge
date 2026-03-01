@@ -2,10 +2,10 @@ package com.david.desafiolibro.model;
 
 public enum Idioma {
     ESPAÑOL("es", "Español"),
-    INGLES("en", "Inglés"),
-    FRANCES("fr", "Francés"),
-    PORTUGUES("pt", "Portugués"),
-    LATIN("la", "Latín"),
+    INGLES("en", "Ingles"),
+    FRANCES("fr", "Frances"),
+    PORTUGUES("pt", "Portugues"),
+    LATIN("la", "Latin"),
     ITALIANO("it","Italiano");
 
     private String idiomaApi;
@@ -26,7 +26,7 @@ public enum Idioma {
         throw new IllegalArgumentException("Ningún idioma encontrado para el código: " + text);
     }
 
-    public static Idioma fromTotalEspanol(String text) {
+    public static Idioma fromEspañol(String text) {
         for (Idioma idioma : Idioma.values()) {
             if (idioma.idiomaEspanol.equalsIgnoreCase(text)) {
                 return idioma;
