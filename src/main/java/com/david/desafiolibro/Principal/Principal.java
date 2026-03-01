@@ -39,8 +39,16 @@ public class Principal {
                     0 - Salir
                     """;
             System.out.println(menu);
-            opcion = teclado.nextInt();
-            teclado.nextLine();
+            try {
+                String lectura = teclado.nextLine();
+                opcion = Integer.parseInt(lectura);
+            } catch (NumberFormatException e) {
+                System.out.println("""
+                    [!] ERROR: Entrada no válida. 
+                    Por favor, escribe un número.
+                    """);
+                opcion = -1;
+                continue;}
 
             switch (opcion) {
                 case 1:
@@ -66,9 +74,6 @@ public class Principal {
                     System.out.println("Opción inválida");
             }
         }
-
-//
-
     }
 
     private void buscarLibrosIdioma() {
